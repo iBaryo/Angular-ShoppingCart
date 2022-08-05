@@ -27,7 +27,7 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { CdkTableModule } from "@angular/cdk/table";
 import { CdkTreeModule } from "@angular/cdk/tree";
 import { FireBaseConfig } from "./../../environments/firebase.config";
-import { GIGYA_CDP } from "../report.service";
+import { GIGYA_CDP } from "./services/report.service";
 
 declare const window: { gigya?: any; CDP?: any };
 

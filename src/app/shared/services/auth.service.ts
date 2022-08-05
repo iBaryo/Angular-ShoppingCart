@@ -4,7 +4,7 @@ import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, tap } from "rxjs/operators";
 
 import { User } from "../models/user";
-import { ReportService } from "../../report.service";
+import { ReportService } from "./report.service";
 
 export const ANONYMOUS_USER: User = new User();
 
@@ -16,20 +16,30 @@ export class AuthService {
 
   private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
 
-  user$: Observable<User> = this.subject.asObservable().pipe(
-    tap((user) => console.log(`changed!`, user)),
-    tap((user) => (this.user = user)),
-    filter((user) => !!user)
+  user$: Observable<User> = this.subject.pipe(
+    tap((user) => {
+      console.log(`changed!`, user);
+      this.user = user;
+    }),
+    filter<User>(Boolean)
   );
 
   isLoggedIn$: Observable<boolean> = this.user$.pipe(
     map((user) => !!user.$key),
-    tap(() => console.log(`logged in!`))
+    tap(isLoggedIn => {
+      if (isLoggedIn) {
+        console.log(`logged in!`)
+      }
+    })
   );
 
   isLoggedOut$: Observable<boolean> = this.isLoggedIn$.pipe(
     map((isLoggedIn) => !isLoggedIn),
-    tap(() => console.log(`logged out!`))
+    tap(isLoggedOut => {
+      if (isLoggedOut) {
+        console.log(`logged out!`)
+      }
+    })
   );
 
   isAdmin$: Observable<boolean> = this.user$.pipe(

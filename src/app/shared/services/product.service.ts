@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { WoocommerceSyncService } from "../../woocommerce-sync.service";
 import { User } from "../models/user";
-import { ReportService } from "../../report.service";
+import { ReportService } from "./report.service";
 
 @Injectable()
 export class ProductService {
