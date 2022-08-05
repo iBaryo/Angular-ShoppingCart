@@ -32,6 +32,9 @@
       "email": "ikismail7@gmail.com"
     }
   ],
+  "engines": {
+    "node": ">=14.0.0 <15"
+  },
   "dependencies": {
     "@angular/animations": "^10.0.2",
     "@angular/cdk": "^10.0.1",
